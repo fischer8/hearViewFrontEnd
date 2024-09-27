@@ -55,7 +55,7 @@ export default function Login() {
             </section>
             <section className="w-5/6" >
               <label className="me-1 font-bold" htmlFor="password">Senha:</label>
-              <input className="mb-5 border ps-1 w-7/12" required id='password' onChange={handleChange} value={info.password.length === 0 ? '' : info.password} />
+              <input className="mb-5 border ps-1 w-7/12" type='password' required id='password' onChange={handleChange} value={info.password.length === 0 ? '' : info.password} />
             </section>
           </section>
           <section className='flex-row'>
