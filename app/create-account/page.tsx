@@ -1,10 +1,10 @@
 "use client"
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { AuthInfo } from '@/components/types';
+import { AuthInfo } from '@/../../components/types';
 
-export default function Login() {
-  const [info, setInfo] = useState<AuthInfo>({ email: "", password: "" });
+export default function CreateAccount() {
+  const [info, setInfo] = useState<AuthInfo>({ email: "", password: "", password2: "" });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -20,26 +20,26 @@ export default function Login() {
     event.preventDefault();
     setLoading(true);
 
-    const res = await fetch("/api/auth", {
-      method: "POST",
-      body: JSON.stringify({ email: info.email, password: info.password }),
-    });
+    if (info.password2 == info.password) {
 
-    const { success, message } = await res.json();
-    if (success) {
-      router.push("/edit");
-      router.refresh();
+      const res = await fetch("/api/create", {
+        method: "POST",
+        body: JSON.stringify({ email: info.email, password: info.password }),
+      });
+
+      const { success, message} = await res.json();
+      if (success) {
+        router.push("/");
+        router.refresh();
+      } else {
+        setLoading(false);
+        alert(message)
+      }
     } else {
+      alert("Senhas não coincidem")
       setLoading(false);
-      alert(message);
     }
   };
-
-  const handleOnClick = () => {
-    console.log("onclick")
-    router.push("/create-account")
-    router.refresh();
-  }
 
   return (
     <main className="md:min-h-screen text-center text-black md:bg-white md:flex md:items-center md:justify-center">
@@ -55,18 +55,17 @@ export default function Login() {
             </section>
             <section className="w-5/6" >
               <label className="me-1 font-bold" htmlFor="password">Senha:</label>
-              <input className="mb-5 border ps-1 w-7/12" required id='password' onChange={handleChange} value={info.password.length === 0 ? '' : info.password} />
+              <input className="mb-5 border ps-1 w-7/12" type='password' required id='password' onChange={handleChange} value={info.password.length === 0 ? '' : info.password} />
+            </section>
+            <section className="w-5/6" >
+              <label className="me-1 font-bold" htmlFor="password2">Confirme a senha:</label>
+              <input className="mb-5 border ps-1 w-7/12" type='password' required id='password2' onChange={handleChange} value={info.password2?.length === 0 ? '' : info.password2} />
             </section>
           </section>
-          <section className='flex-row'>
-            <section className='mb-2'>
-              <button disabled={loading} type='submit' className="bg-purple-600 hover:bg-purple-800 text-white py-1 px-10 rounded">
-                {loading ? 'Carregando...' : 'Acessar'}
-              </button></section>
-            <button disabled={loading} onClick={handleOnClick} type='button' className="bg-purple-600 hover:bg-purple-800 text-white py-1 px-10 rounded">
-              {'Criar Conta'}
+          <section className='mb-2'>
+            <button type='submit' className="bg-purple-600 hover:bg-purple-800 text-white py-1 px-10 rounded">
+              {loading ? 'Carregando...' : 'Criar Conta'}
             </button></section>
-
         </form>
       </section>
     </main>
