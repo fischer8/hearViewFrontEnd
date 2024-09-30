@@ -27,7 +27,7 @@ export default function CreateAccount() {
         body: JSON.stringify({ email: info.email, password: info.password }),
       });
 
-      const { success, message} = await res.json();
+      const { success, message } = await res.json();
       if (success) {
         router.push("/");
         router.refresh();
@@ -45,7 +45,7 @@ export default function CreateAccount() {
     <main className="md:min-h-screen text-center text-black md:bg-white md:flex md:items-center md:justify-center">
       <section className="bg-white absolute top-0 bottom-0 md:static md:border md:rounded-lg md:shadow-lg flex flex-col justify-center py-12 px-6 md:px-2 w-full md:w-1/2">
         <h1 className="text-2xl font-bold mb-4">
-          Login
+          Criar conta
         </h1>
         <form onSubmit={handleSubmit} className='text-black mx-auto '>
           <section className="flex-row justify-center items-center">

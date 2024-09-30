@@ -20,8 +20,6 @@ export async function POST(request: NextRequest) {
       return {status: error.response.status, message: error.response.data.message }
     })
 
-  console.log("data aaa", data)
-
 
   if(data.status) {
   const responseErro = NextResponse.json(

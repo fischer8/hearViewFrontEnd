@@ -36,7 +36,6 @@ export default function Login() {
   };
 
   const handleOnClick = () => {
-    console.log("onclick")
     router.push("/create-account")
     router.refresh();
   }

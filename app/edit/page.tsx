@@ -9,9 +9,9 @@ interface Tag {
 export default function Edit() {
   const [loading, setLoading] = useState(false);
   const [tags, setTags] = useState<Tag[]>([
-    { tagId: 1, data: "abc" },
-    { tagId: 2, data: "aaaaaaaaaaaaaaaaaa" },
-    { tagId: 3, data: "asndkan" }
+    { tagId: 1, data: "sala 502" },
+    { tagId: 2, data: "primeiro andar" },
+    { tagId: 3, data: "sala 808" }
   ]);
 
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
