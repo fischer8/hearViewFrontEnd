@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
 
   const data = await axios.post(url, {
     data: body,
-    token: token,
+    token: token?.value,
   }, {
     headers: {
       'Content-Type': 'application/json',
